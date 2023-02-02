@@ -1,0 +1,3 @@
+Tetris steps
+1.) Make github repo
+2.) Setup environment, index.html, style.css, app.js, link to github
