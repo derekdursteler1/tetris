@@ -1,3 +1,7 @@
 Tetris steps
 1.) Make github repo
 2.) Setup environment, index.html, style.css, app.js, link to github
+3.) Using grid paper/googlesheets visualize tetris board and shapes to understand how to draw them with indices
+4.) Draw tetrimino shape on grid to see it working.
+5.) Apply random logic to randomize tetrimino shape chosen
+6.) Remember to save the currentrotation and make a undraw function for rotating tetriminoes.

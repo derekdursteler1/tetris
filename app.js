@@ -40,13 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const theTetriminoes = [lTetrimino, zTetrimino, tTetrimino, oTetrimino, iTetrimino]
 
     let currentPosition = 4
-    // this grabs first shape in first position (L tetrimino)
-    let current = theTetriminoes[0][0]
+    let currentRotation = 0
+    
+    // randomly select a tetrimino and random rotation
+    let random = Math.floor(Math.random()*theTetriminoes.length)
+    let current = theTetriminoes[random][currentRotation]
 
-    //working on drawing first rotation
+    // drawing the tetrimino
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetrimino')
+        })
+    }
+
+    // undraw the tetrimino
+    function undraw() {
+        current.forEach(index => {
+            squares[currentPosition + index].classList.remove('tetrimino')
         })
     }
 
