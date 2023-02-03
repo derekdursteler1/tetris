@@ -5,3 +5,6 @@ Tetris steps
 4.) Draw tetrimino shape on grid to see it working.
 5.) Apply random logic to randomize tetrimino shape chosen
 6.) Remember to save the currentrotation and make a undraw function for rotating tetriminoes.
+7.) Use setinterval function and make the pieces move down function
+8.) freeze function (using .some function) to stop pieces and stack them
+

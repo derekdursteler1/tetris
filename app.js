@@ -60,6 +60,29 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    draw()
+    // make the tetriminos move down
+    timerId = setInterval(moveDown, 1000)
+
+    // move down function
+    function moveDown() {
+        undraw()
+        currentPosition += width
+        draw()
+        freeze()
+    }
+
+    // freeze function
+    function freeze() {
+        // checking the next space down from each tetrimino squares to see if it has the class 'taken'
+        if(current.some(index => squares [currentPosition +index + width].classList.contains('taken'))) {
+            // turn each tetrimino square into taken class if true
+            current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+            // start a new tetrimino falling after
+            random = Math.floor(Math.random() * theTetriminoes.length)
+            current = theTetriminoes[random][currentRotation]
+            currentPosition = 4
+            draw()
+        }
+    }
 
 })
