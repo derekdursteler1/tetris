@@ -63,6 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // make the tetriminos move down
     timerId = setInterval(moveDown, 1000)
 
+    // assign functions to keycodes left arrow 37, up 38, right 39, down 40
+    function control(e) {
+        if(e.keyCode === 37) {
+            moveLeft()
+        } else if(e.keyCode === 38) {
+            // rotate
+        } else if(e.keyCode === 39) {
+            moveRight()
+        } else if(e.keyCode === 40) {
+            moveDown()
+        }
+    }
+    document.addEventListener('keyup', control)
+
     // move down function
     function moveDown() {
         undraw()
@@ -85,4 +99,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // move tetris piece left unless its at the edge or blocked
+    function moveLeft() {
+        undraw()
+        // mod by width equals zero means the piece is near or at edge
+        const isAtLeftEdge = current.some(index => (currentPosition + index) % width == 0)
+        // if shape is not at the edge
+        if (!isAtLeftEdge) currentPosition -= 1
+        // if shape runs into a square with 'taken' we will stay the same by adding one
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition += 1
+        }
+        draw()
+    }
+    // move tetris piece right unless its at the edge or blocked
+    function moveRight() {
+        undraw()
+        const isAtRightEdge = current.some(index => (currentPosition + index) % width == width - 1 )
+        if (!isAtRightEdge) currentPosition += 1
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            currentPosition -= 1
+        }
+        draw()
+    }
 })

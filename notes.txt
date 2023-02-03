@@ -7,4 +7,8 @@ Tetris steps
 6.) Remember to save the currentrotation and make a undraw function for rotating tetriminoes.
 7.) Use setinterval function and make the pieces move down function
 8.) freeze function (using .some function) to stop pieces and stack them
+9.) moving left function stopping at edges and blocks
+10.) keycode event listener for move left test before adding others
+11.) move right function
+
 
