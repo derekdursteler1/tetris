@@ -10,5 +10,5 @@ Tetris steps
 9.) moving left function stopping at edges and blocks
 10.) keycode event listener for move left test before adding others
 11.) move right function
-
+12.) rotate function 
 
