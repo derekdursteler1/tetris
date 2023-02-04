@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     let squares = Array.from(document.querySelectorAll('.grid div'))
-    const ScoreDisplay = document.querySelector('#score')
-    const StartButton = document.querySelector('#start-button')
+    const scoreDisplay = document.querySelector('#score')
+    const startButton = document.querySelector('#start-button')
     const width = 10
     let nextRandom = 0
+    let timerId
 
     // Tetriminoes draw shape based off google sheet pics
     const lTetrimino = [
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // make the tetriminos move down
-    timerId = setInterval(moveDown, 1000)
+    // timerId = setInterval(moveDown, 1000)
 
     // assign functions to keycodes left arrow 37, up 38, right 39, down 40
     function control(e) {
@@ -161,5 +162,20 @@ document.addEventListener('DOMContentLoaded', () => {
             miniSquares[miniIndex + index].classList.add('tetrimino')
         })
     }
+
+    // add functionality to start/pause button
+    startButton.addEventListener('click', () => {
+        if (timerId) {
+            clearInterval(timerId)
+            timerId = null
+        } else {
+            draw()
+            timerId = setInterval(moveDown, 1000)
+            nextRandom = Math.floor(Math.random()*theTetriminoes.length)
+            displayShape()
+        }
+    })
+
+
 })
 
