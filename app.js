@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ScoreDisplay = document.querySelector('#score')
     const StartButton = document.querySelector('#start-button')
     const width = 10
+    let nextRandom = 0
 
     // Tetriminoes draw shape based off google sheet pics
     const lTetrimino = [
@@ -92,10 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // turn each tetrimino square into taken class if true
             current.forEach(index => squares[currentPosition + index].classList.add('taken'))
             // start a new tetrimino falling after
-            random = Math.floor(Math.random() * theTetriminoes.length)
+            random = nextRandom
+            nextRandom = Math.floor(Math.random() * theTetriminoes.length)
             current = theTetriminoes[random][currentRotation]
             currentPosition = 4
             draw()
+            displayShape()
         }
     }
 
@@ -134,8 +137,29 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
     }
 
+    // show next-up tetrimino in the mini grid
+    const miniSquares = document.querySelectorAll('.mini-grid div')
+    const miniWidth = 4
+    let miniIndex = 0
 
+    // array of 5 tetriminos for mini grid to show
+    const nextUpTetriminos = [
+        [1, miniWidth+1, miniWidth*2+1, 2], // L shape
+        [0, miniWidth, miniWidth+1, miniWidth*2+1], // Z shape
+        [1, miniWidth, miniWidth+1, miniWidth+2], // t shape
+        [0, 1, miniWidth, miniWidth+1], // o shape
+        [1, miniWidth+1, miniWidth*2+1, miniWidth*3+1] // i shape
+    ]
 
-
+    // display the shape in the mini grid display
+    function displayShape () {
+        // remove tetris shape from mini grid
+        miniSquares.forEach(square => {
+            square.classList.remove('tetrimino')
+        })
+        nextUpTetriminos[nextRandom].forEach(index => {
+            miniSquares[miniIndex + index].classList.add('tetrimino')
+        })
+    }
 })
 
