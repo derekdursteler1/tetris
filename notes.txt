@@ -14,3 +14,5 @@ Tetris steps
 13.) next up piece, basically mini redo the project (remake board 4x4 then do JS logic with mini array of shapes)
 14.) to show upcoming piece and some have regular falling down do some swap logic in freeze function and new display mini shape function
 15.) start and pause button
+16.) scoring functionality and deleting row when filled
+17.) game over function
