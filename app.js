@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextRandom = 0
     let timerId
     let score = 0
+    const colors = [
+        'yellow',
+        'red',
+        'purple',
+        'green',
+        'blue'
+    ]
 
     // Tetriminoes draw shape based off google sheet pics
     const lTetrimino = [
@@ -53,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetrimino')
+            squares[currentPosition + index].style.backgroundColor = colors[random]
         })
     }
 
@@ -60,11 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetrimino')
+            squares[currentPosition + index].style.backgroundColor = ''
+
         })
     }
-
-    // make the tetriminos move down
-    // timerId = setInterval(moveDown, 1000)
 
     // assign functions to keycodes left arrow 37, up 38, right 39, down 40
     function control(e) {
@@ -78,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moveDown()
         }
     }
-    document.addEventListener('keyup', control)
+    document.addEventListener('keydown', control)
 
     // move down function
     function moveDown() {
@@ -119,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         draw()
     }
+
     // move tetris piece right unless its at the edge or blocked
     function moveRight() {
         undraw()
@@ -129,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         draw()
     }
+
     // rotate tetrimino
     function rotate() {
         undraw()
@@ -144,8 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // show next-up tetrimino in the mini grid
     const miniSquares = document.querySelectorAll('.mini-grid div')
     const miniWidth = 4
-    let miniIndex = 0
-
+    const miniIndex = 0
     // array of 5 tetriminos for mini grid to show
     const nextUpTetriminos = [
         [1, miniWidth+1, miniWidth*2+1, 2], // L shape
@@ -160,9 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // remove tetris shape from mini grid
         miniSquares.forEach(square => {
             square.classList.remove('tetrimino')
+            square.style.backgroundColor = ''
         })
         nextUpTetriminos[nextRandom].forEach(index => {
             miniSquares[miniIndex + index].classList.add('tetrimino')
+            miniSquares[miniIndex + index].style.backgroundColor = colors[nextRandom]
         })
     }
 
@@ -190,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.forEach(index => {
                     squares[index].classList.remove('taken')
                     squares[index].classList.remove('tetrimino')
+                    squares[index].style.backgroundColor = ''
                 })
                 const squaresRemoved = squares.splice(i, width)
                 squares = squaresRemoved.concat(squares)
