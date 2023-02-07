@@ -88,13 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // assign functions to keycodes left arrow 37, up 38, right 39, down 40
     function control(e) {
-        if(e.keyCode === 37) {
+        if(e.keyCode === 37 && (timerId)) {
             moveLeft()
-        } else if(e.keyCode === 38) {
+        } else if(e.keyCode === 38 && (timerId)) {
             rotate()
-        } else if(e.keyCode === 39) {
+        } else if(e.keyCode === 39 && (timerId)) {
             moveRight()
-        } else if(e.keyCode === 40) {
+        } else if(e.keyCode === 40 && (timerId)) {
             moveDown()
         }
     }
@@ -102,12 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // move down function
     function moveDown() {
-        undraw()
-        currentPosition += width
-        draw()
-        freeze()
-    }
-
+        if(!current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+          undraw()
+          currentPosition += width
+          draw()
+        } else {
+          freeze();  
+        }
+      }
     // freeze function
     function freeze() {
         // checking the next space down from each tetrimino squares to see if it has the class 'taken'
@@ -119,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
             nextRandom = Math.floor(Math.random() * theTetriminoes.length)
             current = theTetriminoes[random][currentRotation]
             currentPosition = 4
+            addScore()
             draw()
             displayShape()
-            addScore()
             gameOver()
         }
     }
@@ -151,6 +153,30 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
     }
 
+    function isAtRight() {
+        return current.some(index=> (currentPosition + index + 1) % width === 0)  
+      }
+      
+      function isAtLeft() {
+        return current.some(index=> (currentPosition + index) % width === 0)
+      }
+      
+      function checkRotatedPosition(P){
+        P = P || currentPosition       //get current position.  Then, check if the piece is near the left side.
+        if ((P+1) % width < 4) {         //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+          if (isAtRight()){            //use actual position to check if it's flipped over to right side
+            currentPosition += 1    //if so, add one to wrap it back around
+            checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+            }
+        }
+        else if (P % width > 5) {
+          if (isAtLeft()){
+            currentPosition -= 1
+          checkRotatedPosition(P)
+          }
+        }
+      }
+
     // rotate tetrimino
     function rotate() {
         undraw()
@@ -160,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentRotation = 0
         }
         current = theTetriminoes[random][currentRotation]
+        checkRotatedPosition()
         draw()
     }
 
