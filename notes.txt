@@ -17,3 +17,4 @@ Tetris steps
 16.) scoring functionality and deleting row when filled
 17.) game over function
 18.) adding colors to tetris shapes 
+19.) css styling

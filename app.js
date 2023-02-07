@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetrimino')
             squares[currentPosition + index].style.backgroundColor = colors[random]
+            // squares[currentPosition + index].style.border = '1px solid grey';
         })
     }
 
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetrimino')
             squares[currentPosition + index].style.backgroundColor = ''
+            squares[currentPosition + index].style.border = ''
 
         })
     }
@@ -169,10 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
         miniSquares.forEach(square => {
             square.classList.remove('tetrimino')
             square.style.backgroundColor = ''
+            square.style.border = ''
         })
         nextUpTetriminos[nextRandom].forEach(index => {
             miniSquares[miniIndex + index].classList.add('tetrimino')
             miniSquares[miniIndex + index].style.backgroundColor = colors[nextRandom]
+           //  miniSquares[miniIndex + index].style.border = '1px solid grey';
+            
         })
     }
 
@@ -201,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     squares[index].classList.remove('taken')
                     squares[index].classList.remove('tetrimino')
                     squares[index].style.backgroundColor = ''
+                    squares[index].style.border = ''
                 })
                 const squaresRemoved = squares.splice(i, width)
                 squares = squaresRemoved.concat(squares)
