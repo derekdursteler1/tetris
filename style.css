@@ -1,6 +1,6 @@
 .container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 h3 {
@@ -13,13 +13,14 @@ div#buttonContainer {
 }
 
 .grid {
-    width: 220px;
+    width: 213px;
     height: 420px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 1px;
     background-color: black;
     border: solid 0.5em #888;
+    justify-self: end;
 }
 
 .grid div {
@@ -34,11 +35,12 @@ div#buttonContainer {
 .mini-grid {
     margin-left: 20px;
     width: 80px;
-    height: 80px;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: black; 
-    border: solid .4em #888;
+    height: 85px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1px;
+    background-color: black;
+    border: solid 0.4em #888;
 }
 
 .mini-grid div {

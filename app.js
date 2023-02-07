@@ -159,9 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // array of 5 tetriminos for mini grid to show
     const nextUpTetriminos = [
         [1, miniWidth+1, miniWidth*2+1, 2], // L shape
-        [0, miniWidth, miniWidth+1, miniWidth*2+1], // Z shape
-        [1, miniWidth, miniWidth+1, miniWidth+2], // t shape
-        [0, 1, miniWidth, miniWidth+1], // o shape
+        [0+1 , miniWidth+1, miniWidth+2, miniWidth*2+2], // Z shape
+        [miniWidth+1, miniWidth*2, miniWidth*2+1, miniWidth*2+2], // t shape
+        [miniWidth+1, miniWidth+2, miniWidth*2+1, miniWidth*2+2], // o shape
         [1, miniWidth+1, miniWidth*2+1, miniWidth*3+1] // i shape
     ]
 
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // game over
     function gameOver() {
         if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-            scoreDisplay.innerHTML = 'end'
+            scoreDisplay.innerHTML = 'Game Over'
             clearInterval(timerId)
         }
     }
