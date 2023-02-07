@@ -168,12 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // remove tetris shape from mini grid
         miniSquares.forEach(square => {
             square.classList.remove('tetrimino')
+            square.classList.remove(colors[random])
             square.style.backgroundColor = ''
             square.style.border = ''
         })
         nextUpTetriminos[nextRandom].forEach(index => {
             miniSquares[miniIndex + index].classList.add('tetrimino')
-            miniSquares[miniIndex + index].style.backgroundColor = colors[nextRandom]
+            miniSquares[miniIndex + index].classList.add(colors[nextRandom])
             
         })
     }
