@@ -8,46 +8,60 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId
     let score = 0
     const colors = [
-        'yellow', //yellow
-        'red', // red
-        'orange', // orange
-        'green', // green
-        'blue' // blue
+        'blue',
+        'orange',
+        'green', 
+        'red', 
+        'purple',
+        'yellow',
+        'teal' 
     ]
 
     // Tetriminoes draw shape based off google sheet pics
-    const lTetrimino = [
+    const lTetrimino = [ // blue 
         [1, width+1, width*2+1, 2],
         [width, width+1, width+2, width*2+2],
         [1, width+1, width*2+1, width*2],
         [width, width*2, width*2+1, width*2+2]
     ]
-    const zTetrimino = [
+    const lTetromino2 = [ // orange
+        [0, width, width*2, width*2+1],
+        [0, 1, 2, width],
+        [0, 1, width+1, width*2+1],
+        [2, width, width+1, width+2]
+      ]
+    const zTetrimino = [ // green
         [width*2, width*2+1, width+1, width+2],
         [0, width, width+1, width*2+1],
         [width*2, width*2+1, width+1, width+2],
         [0, width, width+1, width*2+1]
     ]
-    const tTetrimino = [
+    const zTetromino2 = [ // red
+        [1, width, width+1, width*2],
+        [width, width+1, width*2+1, width*2+2],
+        [1, width, width+1, width*2],
+        [width, width+1, width*2+1, width*2+2]
+      ]
+    const tTetrimino = [ // purple
         [1, width, width+1, width+2],
         [1, width+1, width+2, width*2+1],
         [width, width+1, width+2, width*2+1],
         [1, width, width+1, width*2+1]
     ]
-    const oTetrimino = [
+    const oTetrimino = [ // yellow
         [0, 1, width, width+1],
         [0, 1, width, width+1],
         [0, 1, width, width+1],
         [0, 1, width, width+1]
     ]
-    const iTetrimino = [
+    const iTetrimino = [ // teal
         [1, width+1, width*2+1, width*3+1],
         [width, width+1, width+2, width+3],
         [1, width+1, width*2+1, width*3+1],
         [width, width+1, width+2, width+3]
     ]
     // all shapes in array
-    const theTetriminoes = [lTetrimino, zTetrimino, tTetrimino, oTetrimino, iTetrimino]
+    const theTetriminoes = [lTetrimino, lTetromino2, zTetrimino, zTetromino2, tTetrimino, oTetrimino, iTetrimino]
 
     let currentPosition = 4
     let currentRotation = 0
@@ -69,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetrimino')
             squares[currentPosition + index].classList.remove(colors[random])
-
         })
     }
 
@@ -157,7 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // array of 5 tetriminos for mini grid to show
     const nextUpTetriminos = [
         [1, miniWidth+1, miniWidth*2+1, 2], // L shape
+        [0, miniWidth, miniWidth*2, miniWidth*2+1], // l shape 2
         [0+1 , miniWidth+1, miniWidth+2, miniWidth*2+2], // Z shape
+        [1, miniWidth, miniWidth+1, miniWidth*2], // z shape 2
         [miniWidth+1, miniWidth*2, miniWidth*2+1, miniWidth*2+2], // t shape
         [miniWidth+1, miniWidth+2, miniWidth*2+1, miniWidth*2+2], // o shape
         [1, miniWidth+1, miniWidth*2+1, miniWidth*3+1] // i shape
@@ -201,8 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 score += 1
                 scoreDisplay.innerHTML = score
                 row.forEach(index => {
-                    squares[index].classList.remove('taken')
-                    squares[index].classList.remove('tetrimino')
+                    squares[index].removeAttribute('class')
                     squares[index].style.backgroundColor = ''
                     squares[index].style.border = ''
                 })
