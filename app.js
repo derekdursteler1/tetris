@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerId
     let score = 0
     const colors = [
-        'yellow',
-        'red',
-        'purple',
-        'green',
-        'blue'
+        'yellow', //yellow
+        'red', // red
+        'orange', // orange
+        'green', // green
+        'blue' // blue
     ]
 
     // Tetriminoes draw shape based off google sheet pics
@@ -60,8 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetrimino')
-            squares[currentPosition + index].style.backgroundColor = colors[random]
-            // squares[currentPosition + index].style.border = '1px solid grey';
+            squares[currentPosition + index].classList.add(colors[random])
         })
     }
 
@@ -69,8 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw() {
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetrimino')
-            squares[currentPosition + index].style.backgroundColor = ''
-            squares[currentPosition + index].style.border = ''
+            squares[currentPosition + index].classList.remove(colors[random])
 
         })
     }
@@ -176,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         nextUpTetriminos[nextRandom].forEach(index => {
             miniSquares[miniIndex + index].classList.add('tetrimino')
             miniSquares[miniIndex + index].style.backgroundColor = colors[nextRandom]
-           //  miniSquares[miniIndex + index].style.border = '1px solid grey';
             
         })
     }
